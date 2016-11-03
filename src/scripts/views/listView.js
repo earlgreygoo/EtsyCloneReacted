@@ -16,9 +16,9 @@ var ListView = React.createClass({
 
 var ProductContainer = React.createClass({
 	_makeProducts: function(){
-		console.log(this.props)
+	
 		var jsxArray = []
-		for(var i = 0; i < this.props.collection.models.length; i ++){
+		for(var i = 0; i <this.props.collection.length; i ++){
 			console.log("hey")
 			var productModel = this.props.collection.models[i]
 			jsxArray.push(<Product model={productModel} />)
@@ -38,12 +38,17 @@ var ProductContainer = React.createClass({
 
 
 var Product = React.createClass({
+
+	_clicked: function() {
+		location.hash = "details/" + this.props.model.attributes.listing_id
+	},
+
 	render: function(){
 		var model = this.props.model
 		console.log("Model from inside the article component", model)
 		return (
-			<div className="image" onClick={this._clickedDiv}>
-
+			<div className="productBox" > 
+				<img src={model.attributes.MainImage.url_75x75} onClick={this._clicked}/>
 			</div>
 			)
 	}

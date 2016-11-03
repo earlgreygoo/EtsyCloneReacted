@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Backbone from 'backbone'
 import ListView from './views/listView'
+import detailView from './views/detailView'
 
 
 var etsyKey = "0huv60c7gbl3v9unm8dt7u2t"
@@ -32,13 +33,18 @@ var ProductModel = Backbone.Model.extend({
 })
 
 
+
+//VIEWS 
+
+
+
 	//CONTROLLER 
 
 	var Controller = Backbone.Router.extend({ 
 	routes: { 
  		"home": "handleHome", 
 		"search/:term": "handleSearch",
-		"details": "handleDetails",
+		"details/:id": "handleDetails",
 		"*default": "handleDefault",
 		
 	},
@@ -54,19 +60,16 @@ var ProductModel = Backbone.Model.extend({
 
 			}
 		})
-		
-		promise.then(ReactDOM.render(<ListView collection={productCollection} />, document.querySelector('.container')))
+
+		promise.then(function(){ReactDOM.render(<ListView collection={productCollection} />, document.querySelector('.container'))})
 
 
 
 	},
 	handleSearch: function(term){ 
 
-		var productCollection = new ProductCollection(), 
-			view = new ListView({
-				collection: productCollection
-			})
-
+		var productCollection = new ProductCollection()
+			
 		productCollection.fetch({
 			dataType: 'jsonp',
 			data: {
@@ -75,7 +78,7 @@ var ProductModel = Backbone.Model.extend({
 				"keywords": term,
 				"includes": "MainImage,shop"
 			}
-		})
+		}).then(function(){ReactDOM.render(<ListView collection={productCollection} />, document.querySelector('.container'))})
 	},
 
 	handleDetails: function(term) {
@@ -88,10 +91,9 @@ var ProductModel = Backbone.Model.extend({
 			data: {
 
 				"api_key": etsyKey,
-				"keywords": term,
-				"includes": "MainImage,shop"
+				"listing_id": id
 			}
-		})
+		}).then(function(){ReactDOM.render(<DetailView collection={productCollection} />, document.querySelector('.container'))})
 	},
 	
 	handleDefault: function(){ 

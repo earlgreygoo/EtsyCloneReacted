@@ -29,10 +29,34 @@ $color5: rgba(124, 223, 100, 1);
 
 	input {
 		font-size: 20px;
-		
 		border-radius: 20%;
 		border: 2px solid $color4;
 		margin-left: 3rem;
 	}
 
+}
+
+.article-container {
+
+	.productBox {
+		text-align: center;
+		display: inline-block;
+		width: 20%;
+		padding: 2rem;
+		border:1px solid $color5;
+	}
+
+		img {
+			margin: auto;
+			text-align: center;
+			display: inline-block;
+		}
+	.productBox:hover{
+		cursor: pointer;
+		background: $color5;
+		img {
+			transition: all 1s ease;
+			transform: scale(1.5);
+		}
+	} 
 }
