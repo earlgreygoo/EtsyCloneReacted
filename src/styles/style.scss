@@ -54,9 +54,6 @@ $color5: rgba(124, 223, 100, 1);
 	.productBox:hover{
 		cursor: pointer;
 		background: $color5;
-		img {
-			transition: all 1s ease;
-			transform: scale(1.5);
-		}
+		
 	} 
 }

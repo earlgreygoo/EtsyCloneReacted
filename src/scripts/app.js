@@ -27,7 +27,7 @@ var ProductModel = Backbone.Model.extend({
 		return "https://openapi.etsy.com/v2/listings/.js" + this.listing_id
 	},
 	parse: function(rawResponse) {
-		var parsedResponse = rawResponse.results
+		var parsedResponse = rawResponse.response.docs[0]
 		return parsedResponse
 	}
 })
